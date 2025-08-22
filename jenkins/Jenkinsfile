@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 dir('bugtracker-backend'){
-                    sh 'mkdir /.cache RUN chmod -R 777 /.cache ...'
+                    sh 'mkdir /.cache && chmod -R 777 /.cache ...'
                     sh 'go test -v ./...'
                 }
 
