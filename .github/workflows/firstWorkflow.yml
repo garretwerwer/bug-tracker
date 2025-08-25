@@ -40,5 +40,5 @@ jobs:
         working-directory: ./bugtracker-frontend
         run: |
           npm ci
-          npm tests
+          npm test
     
