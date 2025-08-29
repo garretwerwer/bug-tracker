@@ -207,14 +207,21 @@ jobs:
          path: ./tests-e2e/test-results/results.xml
          reporter: jest-junit
 
-      - name: Performance
-        uses: dorny/test-reporter@v1
+      - name: Upload Performace Raw Results
         if: always()
+        uses : actions/upload-artifact@v4
         with:
-         name: E2E tests report
-         path: ./tests-e2e/test-results/results.xml
-         reporter: jest-junit
+          name: perf-raw-results
+          path: ./tests-perf/summary.json
+          retention-days: 30
 
+      - name: Upload Performace HTML Results
+        if: always()
+        uses : actions/upload-artifact@v4
+        with:
+          name: perf-report
+          path: ./tests-perf/perf-results.html
+          retention-days: 30
   
 
 
