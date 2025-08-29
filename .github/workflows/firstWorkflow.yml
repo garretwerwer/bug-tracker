@@ -152,7 +152,6 @@ jobs:
       - name: Run Performance
         uses: grafana/run-k6-action@v1
         with:
-         name: E2E tests report
          path: tests-perf/script.js
          flags: --out json=summary.json
       
