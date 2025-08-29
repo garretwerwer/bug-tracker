@@ -146,6 +146,16 @@ jobs:
           npx playwright install
           npx playwright test
       
+      - name: Setup K6
+        uses: grafana/setup-k6-action@v1
+
+      - name: Run Performance
+        uses: grafana/run-k6-action@v1
+        with:
+         name: E2E tests report
+         path: tests-perf/script.js
+         flags: --out json=summary.json
+      
       - name: Shutdown application
         run: docker compose down
       
@@ -190,6 +200,14 @@ jobs:
           retention-days: 30
 
       - name: Publish E2E test Results
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+         name: E2E tests report
+         path: ./tests-e2e/test-results/results.xml
+         reporter: jest-junit
+
+      - name: Performance
         uses: dorny/test-reporter@v1
         if: always()
         with:
